@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravity = -13.0f;
     [SerializeField][Range(0.0f, 0.5f)] float moveSmoothTime = 0.3f;
 
+    // UI on paper, showing instrucitons
+    public LevelMetaData level;
+    public test ts;
+
     float cameraPitch = 0.0f;
     float velocityY = 0.0f;
     CharacterController controller = null;
@@ -25,10 +29,27 @@ public class PlayerController : MonoBehaviour
             Cursor.lockState=CursorLockMode.Locked;
             Cursor.visible=false;
         }
+        // UI on paper, showing instrucitons
+        ts=GameObject.FindGameObjectWithTag("InstructionText").GetComponent<test>();
+        level.count=0;
+        ts.LoadText(level.level1,1);
     }
 
     void Update()
     {
+        // UI on paper, showing instrucitons
+        if(Input.GetKeyDown(KeyCode.R)) {
+            level.count++;
+            Debug.Log(level.count);
+            ts.LoadText(level.level2,-1);
+        }
+        if(Input.GetKeyDown(KeyCode.T)) {
+
+            ts.LoadText(level.level1,1);
+        }
+
+
+
         UpdateMouseLook();
         UpdateMovement();
     }

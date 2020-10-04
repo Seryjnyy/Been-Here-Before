@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
+  - Battery
+  - Flashlight
+  - Instructions
+  - InstructionText
+  - NotesArrow
   layers:
   - Default
   - TransparentFX

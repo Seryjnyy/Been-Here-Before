@@ -5,14 +5,19 @@ using UnityEngine;
 public class PlayerCameraRay : MonoBehaviour
 {
     public Camera camera;
+    public Battery battery;
     bool showPrompt = false;
     string pressKeyToOpen = "Press E to open";
+    string pressKeyToBattery = "Press E to recharge";
+    string prompt = null;
 
     void Start() {
         camera=Camera.main;
+        battery=GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Battery>();
     }
     void Update()
     {
+        showPrompt=false;
         RayCastCamera();
     }
 
@@ -21,24 +26,32 @@ public class PlayerCameraRay : MonoBehaviour
         Ray ray = camera.ScreenPointToRay(Input.mousePosition);
         
         if(Physics.Raycast(ray, out hit, 20.0f)) {
-            if(hit.collider.tag =="Door") {
-                LatchOpenDoor latch = hit.collider.GetComponentInParent<LatchOpenDoor>();
-                if(latch.open != true) {
+            //Debug.Log(hit.collider.tag);
+            switch(hit.collider.tag) {
+                case "Door":
+                    LatchOpenDoor latch = hit.collider.GetComponentInParent<LatchOpenDoor>();
+                    if(latch.open!=true) {
+                        prompt=pressKeyToOpen;
+                        showPrompt=true;
+                        if(Input.GetKeyDown(KeyCode.E)) {
+                            showPrompt=false;
+                            latch.OpenDoor();
+                        }
+                    }
+                    else {
+                        showPrompt=false;
+                    }
+                    break;
+                case "Battery":
+                    prompt=pressKeyToBattery;
                     showPrompt=true;
                     if(Input.GetKeyDown(KeyCode.E)) {
-                        showPrompt=false;
-                        latch.OpenDoor();
-
+                        battery.batteryLife+=5;
+                        Destroy(hit.collider.gameObject);
                     }
-                }
-                
-                //Open door
-                
+                    break;
+            }
 
-            }
-            else {
-                showPrompt=false;
-            }
             
             //Debug.DrawRay(ray.origin, ray.direction*20, Color.red);
         }
@@ -46,6 +59,6 @@ public class PlayerCameraRay : MonoBehaviour
 
     void OnGUI() {
         if(showPrompt)
-        GUI.Box(new Rect(140, Screen.height-50, Screen.width-300, 120), (pressKeyToOpen));
+        GUI.Box(new Rect(140, Screen.height-50, Screen.width-300, 120), (prompt));
     }
 }
