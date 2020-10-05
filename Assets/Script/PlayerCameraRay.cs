@@ -29,6 +29,7 @@ public class PlayerCameraRay : MonoBehaviour
             //Debug.Log(hit.collider.tag);
             switch(hit.collider.tag) {
                 case "Door":
+
                     LatchOpenDoor latch = hit.collider.GetComponentInParent<LatchOpenDoor>();
                     if(latch.open!=true) {
                         prompt=pressKeyToOpen;
@@ -36,7 +37,12 @@ public class PlayerCameraRay : MonoBehaviour
                         if(Input.GetKeyDown(KeyCode.E)) {
                             showPrompt=false;
                             latch.OpenDoor();
+                            if(hit.collider.gameObject.GetComponent<TeleportPlayer>()!=null) {
+                                Debug.Log("Hello");
+                                TeleportPlayer teleport = hit.collider.GetComponent<TeleportPlayer>();
+                                teleport.TeleportPlayerTo();
                         }
+                    }
                     }
                     else {
                         showPrompt=false;

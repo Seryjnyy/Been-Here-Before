@@ -7,7 +7,7 @@ public class test : MonoBehaviour
     public Text text;
     public RectTransform img;
     int arrowDirection = 0;
-    void Start()
+    void Awake()
     {
         text=gameObject.GetComponent<Text>();
         img=GameObject.FindGameObjectWithTag("NotesArrow").GetComponent<RectTransform>();
