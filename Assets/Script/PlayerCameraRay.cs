@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCameraRay : MonoBehaviour
@@ -37,8 +36,8 @@ public class PlayerCameraRay : MonoBehaviour
                         if(Input.GetKeyDown(KeyCode.E)) {
                             showPrompt=false;
                             latch.OpenDoor();
+                            Debug.Log(hit.collider.gameObject.GetComponent<TeleportPlayer>());
                             if(hit.collider.gameObject.GetComponent<TeleportPlayer>()!=null) {
-                                Debug.Log("Hello");
                                 TeleportPlayer teleport = hit.collider.GetComponent<TeleportPlayer>();
                                 teleport.TeleportPlayerTo();
                         }

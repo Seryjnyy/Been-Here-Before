@@ -10,6 +10,7 @@ TagManager:
   - Instructions
   - InstructionText
   - NotesArrow
+  - PlayerTag
   layers:
   - Default
   - TransparentFX

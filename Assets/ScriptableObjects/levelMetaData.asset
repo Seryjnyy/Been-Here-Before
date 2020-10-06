@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f91fd14679249c42916f1d5fe1ab7b4, type: 3}
   m_Name: levelMetaData
   m_EditorClassIdentifier: 
-  count: 0
+  levelCount: 0
+  houseStartPositions:
+  - {x: 200, y: 6.63, z: 123}
+  - {x: 330, y: 6.63, z: 64}
+  - {x: 493, y: 12.8, z: 105}
   level1:
   - Go down the stairs
   - Open that door stupid

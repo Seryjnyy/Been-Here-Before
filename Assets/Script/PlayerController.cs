@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
         }
         // UI on paper, showing instrucitons
         ts=GameObject.FindGameObjectWithTag("InstructionText").GetComponent<test>();
-        level.count=0;
         ts.LoadText(level.level1,1);
     }
 
@@ -39,8 +38,6 @@ public class PlayerController : MonoBehaviour
     {
         // UI on paper, showing instrucitons
         if(Input.GetKeyDown(KeyCode.R)) {
-            level.count++;
-            Debug.Log(level.count);
             ts.LoadText(level.level2,-1);
         }
         if(Input.GetKeyDown(KeyCode.T)) {
