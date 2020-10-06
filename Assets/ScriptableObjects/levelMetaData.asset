@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f91fd14679249c42916f1d5fe1ab7b4, type: 3}
   m_Name: levelMetaData
   m_EditorClassIdentifier: 
-  levelCount: 0
+  levelCount: -1
+  batteryCount: 79
+  toysTocollect: 20
+  ToysCollected: 1
   houseStartPositions:
   - {x: 200, y: 6.63, z: 123}
   - {x: 330, y: 6.63, z: 64}
@@ -22,6 +25,9 @@ MonoBehaviour:
   - Open that door stupid
   - Go down the stairs
   - Open that door stupid
+  - You can pickup things!
+  - Just need to look lower
+  - Should work
   level2:
   - Go dowfdsafsdn the stairs
   - Open that d3235oor stupid

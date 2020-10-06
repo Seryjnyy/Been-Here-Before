@@ -22,8 +22,6 @@ public class test : MonoBehaviour
         for(int i = 0; i<instructions.Length; i++) 
             UIText+=instructions[i]+"\n";
 
-
-
            text.text=UIText;
        
 

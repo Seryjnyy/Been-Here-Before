@@ -32,7 +32,12 @@ public class PlayerController : MonoBehaviour
         // UI on paper, showing instrucitons
         ts=GameObject.FindGameObjectWithTag("InstructionText").GetComponent<test>();
         ts.LoadText(level.level1,1);
+        level.ToysCollected=0;
     }
+public void MoveToLocation(Vector3 newPosition){
+    transform.position = newPosition;
+}
+
 
     void Update()
     {
@@ -44,9 +49,6 @@ public class PlayerController : MonoBehaviour
 
             ts.LoadText(level.level1,1);
         }
-
-
-
         UpdateMouseLook();
         UpdateMovement();
     }

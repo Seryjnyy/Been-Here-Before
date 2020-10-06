@@ -7,8 +7,7 @@ public class UIHandler : MonoBehaviour
 {
     [SerializeField] float battery;
     [SerializeField] Text healthText;
-
-    public int gameTime = 1200;
+    [SerializeField] LevelMetaData level;
 
     public Image img;
     public Battery flashlightBattery;
@@ -23,7 +22,7 @@ public class UIHandler : MonoBehaviour
     void Update()
     {
         battery=flashlightBattery.batteryLife;
-        healthText.text="Battery = "+battery;
+        healthText.text="Toys "+level.ToysCollected+"/"+level.toysTocollect;
         img.rectTransform.localScale = new Vector3(battery/batteryScale, img.rectTransform.localScale.y, img.rectTransform.localScale.z);
         //if(Input.GetKeyDown(KeyCode.S)) {
         //    battery--;

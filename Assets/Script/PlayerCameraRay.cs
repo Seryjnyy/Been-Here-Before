@@ -5,14 +5,18 @@ public class PlayerCameraRay : MonoBehaviour
 {
     public Camera camera;
     public Battery battery;
+
+    [SerializeField]LevelMetaData level;
     bool showPrompt = false;
     string pressKeyToOpen = "Press E to open";
     string pressKeyToBattery = "Press E to recharge";
+    string pressToPickup = "Press E to pickup toy";
     string prompt = null;
 
     void Start() {
         camera=Camera.main;
         battery=GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Battery>();
+        //level=GameObject.FindGameObjectWithTag<>
     }
     void Update()
     {
@@ -36,7 +40,7 @@ public class PlayerCameraRay : MonoBehaviour
                         if(Input.GetKeyDown(KeyCode.E)) {
                             showPrompt=false;
                             latch.OpenDoor();
-                            Debug.Log(hit.collider.gameObject.GetComponent<TeleportPlayer>());
+                            //Debug.Log(hit.collider.gameObject.GetComponent<TeleportPlayer>());
                             if(hit.collider.gameObject.GetComponent<TeleportPlayer>()!=null) {
                                 TeleportPlayer teleport = hit.collider.GetComponent<TeleportPlayer>();
                                 teleport.TeleportPlayerTo();
@@ -52,6 +56,14 @@ public class PlayerCameraRay : MonoBehaviour
                     showPrompt=true;
                     if(Input.GetKeyDown(KeyCode.E)) {
                         battery.batteryLife+=5;
+                        Destroy(hit.collider.gameObject);
+                    }
+                    break;
+                case "Toy":
+                    prompt=pressToPickup;
+                    showPrompt=true;
+                     if(Input.GetKeyDown(KeyCode.E)) {
+                        level.ToysCollected++;
                         Destroy(hit.collider.gameObject);
                     }
                     break;

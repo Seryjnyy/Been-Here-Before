@@ -1,31 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class TeleportPlayer : MonoBehaviour
 {
     public Light flashlight;
     public LevelMetaData level;
-    public Transform playerTransform;
+    public PlayerController playerController;
 
-    // Start is called before the first frame update
+    
     void Awake()
     {
         level.levelCount=-1;
         flashlight=GameObject.FindGameObjectWithTag("Flashlight").GetComponent<Light>();
-        playerTransform = GameObject.FindGameObjectWithTag("PlayerTag").GetComponent<Transform>();
+        playerController = GameObject.FindGameObjectWithTag("PlayerTag").GetComponent<PlayerController>();
     }
 
     public void TeleportPlayerTo() {
         level.levelCount++;
-        Debug.Log(level.houseStartPositions[level.levelCount]);
-        playerTransform.pos=new Vector3(0,0,0);//level.houseStartPositions[level.levelCount];
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        if(level.levelCount >=3){
+        SceneManager.LoadScene("GameOver");
+        }else{
+        playerController.gameObject.GetComponent<PlayerController>().enabled=false;
+        playerController.MoveToLocation(level.houseStartPositions[level.levelCount]);
+        Invoke("turnCharacterControllerOn",0.5f);
+        }
         
     }
+    public void turnCharacterControllerOn(){
+playerController.gameObject.GetComponent<PlayerController>().enabled=true;
+    }
+
+
 }
